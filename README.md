@@ -1,54 +1,98 @@
-# Bayesian Dynamic Strategy Allocation
+# 모멘텀·저변동성 전략의 베이지안 동적 배분
 
-KOSPI200과 S&P 500에서 2년 고가 모멘텀(M), 60일 저변동성(L), 현금을 베이지안 사후예측과 비용을 고려해 배분합니다. 두 시장은 별도 계좌와 달력으로 실행합니다.
+**FIND-A Sprint 2 · TEAM Beta**  
+공동연구: **김종엽 · 오준영 · 장민준 · 황성혁**
 
-## 보고서 작성 안내
+KOSPI200과 S&P 500에서 모멘텀(M), 저변동성(L), 현금의 비중을 조절하는 공동연구입니다. 단순히 두 전략에 50%씩 투자하는 방식과 베이지안 모형에 따라 비중을 바꾸는 방식을 비교했습니다. 두 시장은 각자의 거래일과 통화로 별도 평가했습니다.
 
-1. [최종 연구 보고서](reports/final/README.md): 두 시장의 성과표·통계적 비교·결론과 한계.
-2. [수리 모형](docs/mathematics.md): Part 1·2와 B0·B1·B2·B2.1·B2.2의 신호·사전·사후추정·예측·배분·평가식.
-3. [연구 방법](docs/methodology.md) · [데이터 규격](docs/data.md): 거래 시점·장부·비용·원본 정의.
-4. [수치 검증](docs/numerical_validation.md): 표본·시드·ESS에 따른 해석 범위.
+이 저장소는 공동연구 자료를 김종엽의 GitHub에 정리한 공개 사본입니다. 코드의 원본과 기여 표기는 [출처·공동연구자](ATTRIBUTION.md)에 정리했습니다.
 
-필요한 설명·성과·선정 근거·압축 재현 입력은 이 저장소에 포함돼 있다. 다른 브랜치나 Notion을 읽지 않아도 보고서를 작성하고 저장된 결과를 재계산할 수 있다.
+## 먼저 볼 자료
 
-## 실행
+| 자료 | 내용 |
+|---|---|
+| [최종 발표 PDF](reports/presentation/Beta_Sprint2_Final.pdf) | 제공된 발표자료 원본, 표지 포함 52쪽 |
+| [발표 PPTX](reports/presentation/Beta_Sprint2_Final_view_only.pptx) | PDF 각 페이지를 그대로 넣은 보기용 변환본 |
+| [발표자료 안내](reports/presentation/README.md) | 원본·변환본 구분과 파일 정보 |
+| [최종 연구 보고서](reports/final/README.md) | 시장별 성과, 통계적 비교, 해석과 한계 |
+| [수리 모형](docs/mathematics.md) · [연구 방법](docs/methodology.md) | 신호부터 예측·배분·체결·평가까지의 정의 |
+| [데이터 규격](docs/data.md) · [수치 검증](docs/numerical_validation.md) | 입력 파일, 재현 방법, 모형의 안정성 |
 
-Python 3.11, 저장소 최상위 PowerShell 기준입니다.
+![TEAM Beta 최종 발표 표지](reports/presentation/cover.png)
 
-```powershell
-py -3.11 -m venv .venv
-.\.venv\Scripts\python -m pip install -r requirements.txt
-.\.venv\Scripts\python -m pytest -q
-.\.venv\Scripts\python -m sprint2 run --market all --run-id full
-.\.venv\Scripts\python -m sprint2 report reports/final
-.\.venv\Scripts\python tools/verify_final.py
-```
+PPTX는 편집 가능한 원본 파일이 아닙니다. PDF의 52개 페이지를 이미지 슬라이드로 옮겼으며, 텍스트·수식·차트의 개별 편집은 지원하지 않습니다. 발표 당시 자료와 저장소의 최종 결과를 함께 보관했습니다. 구체적인 성과 수치와 검증 결과는 최종 연구 보고서를 기준으로 확인할 수 있습니다.
 
-원본 두 파일을 `data/raw/`에 준비합니다. 파일명·해시는 [데이터 규격](docs/data.md)에 있습니다. 원본 없이도 포함된 최종 자료로 report 명령을 실행할 수 있습니다. 단독 실행은 `--market kospi200` 또는 `--market sp500`, 데이터 검사는 `check-data --market all`입니다. 외부 경로는 단독 실행의 `--data` 또는 시장별 설정으로 지정합니다.
+## 연구에서 다룬 문제
 
-## 구성
+모멘텀과 저변동성은 서로 다른 기준으로 종목을 고릅니다. 두 전략을 함께 사용할 때 비중을 고정할지, 예상 수익과 위험에 따라 바꿀지 비교했습니다. 비중을 자주 바꾸면서 생기는 거래비용과 현금 보유도 함께 반영했습니다.
+
+| 구성 | 기준 |
+|---|---|
+| 모멘텀 M | 현재 가격을 최근 504거래일 최고가로 나눈 값이 높은 종목 |
+| 저변동성 L | 최근 60거래일 수익률의 표준편차가 낮은 종목 |
+| 20·40 규칙 | 신호 순위 상위 20%에서 신규 편입, 기존 보유종목은 상위 40% 안에 있으면 유지 |
+| 종목 재선정 | 월말 기준으로 판단하고 다음 거래일 종가에 체결 |
+| 배분 대상 | 모멘텀 전략, 저변동성 전략, 현금 |
+| 비교 정책 | M_only, L_only, EW_monthly, Cash_timing, B0, B1, B2, B2_1, B2_2 |
+
+20·40은 종목 수나 보유일 수가 아니라 **순위의 비율**입니다. 편입과 유지 기준을 나누어 경계 근처에서 반복 매매가 발생하는 일을 줄이도록 설계했습니다. 이 규칙만의 효과를 분리한 회전율 감소율은 별도로 제시하지 않습니다.
+
+신호 시점과 체결 시점을 나누고, 실제 현금·보유수량을 기록하는 공통 장부에서 비용을 차감했습니다. B2.1은 국면 간 평균을 공유하고, B2.2는 두 전략의 공동 국면과 공분산을 추정합니다. 상세 가정과 계산식은 수리 모형 문서에 있습니다.
+
+## 결과와 해석
+
+전체 평가기간은 2012–2025년, 개발기간은 2012–2019년, 테스트 구간은 2020–2025년입니다. 아래는 저장된 최종 보고서의 테스트 구간 결과입니다. 배당을 제외한 가격수익률에 거래비용을 반영했으며, 과거 자료를 이용한 연구 결과입니다.
+
+| 시장 | 정책 | CAGR | Sharpe | MDD |
+|---|---|---:|---:|---:|
+| KOSPI200 | 모멘텀 단독 | 16.49% | 0.876 | −34.55% |
+| KOSPI200 | 월별 50:50 | 13.25% | 0.805 | −34.15% |
+| KOSPI200 | B2 | 10.66% | 0.768 | −29.31% |
+| S&P 500 | 월별 50:50 | 4.41% | 0.437 | −23.63% |
+| S&P 500 | B2 | 4.56% | 0.507 | −19.68% |
+
+한국에서는 모멘텀 단독의 수익률이 강했습니다. 미국 B2는 50:50과 비슷한 수익률에서 최대낙폭을 줄였지만, 50:50 대비 CER 차이의 95% 구간은 0을 포함했습니다. 따라서 동적 배분의 우위가 통계적으로 입증됐다고 해석하지 않았습니다.
+
+미국 B2의 테스트 연환산 회전율은 4.33배로 50:50의 1.58배보다 높았습니다. 낙폭 개선과 함께 잦은 배분 변경에 따른 비용도 살펴봐야 합니다. 확장 모형의 비교, B2.2의 유효표본수와 표본 수 민감도는 [최종 보고서](reports/final/README.md)와 [수치 검증](docs/numerical_validation.md)에 정리했습니다.
+
+현금 이자는 0으로 두었고, 가격이 사라진 보유종목은 마지막 평가액을 유지했습니다. 미국 거래비용은 매수·매도 각각 6.5bp라는 가정값입니다. 배당, 상장폐지 결제, 실제 회수금액은 별도로 모형화하지 않았습니다. 이미 관찰한 자료를 이용한 선택이므로 새 미관측 표본에서의 검증과 구분합니다.
+
+## 코드와 자료 구성
 
 | 경로 | 역할 |
 |---|---|
-| sprint2/ | 신호, 베이지안 모형, 공통 장부, 평가와 CLI |
-| config/common.yaml | 공통 전략·모형·평가 설정 |
-| config/kospi200.yaml, config/sp500.yaml | 시장별 데이터·비용·통화 |
-| reports/final/ | 비교표·그림·시장별 결과와 압축 재계산 자료 |
-| tests/ | 체결·누출·캐시·시장·발행 자료 검증 |
-| docs/ | 방법론·데이터·핵심 선정 근거 |
+| `sprint2/` | 전략 신호, 베이지안 모형, 장부, 평가, CLI |
+| `config/` | 공통·시장별 설정, 비용과 통화 |
+| `reports/presentation/` | 발표 PDF, 보기용 PPTX, 표지 |
+| `reports/final/` | 성과표·그림, 시장별 압축 재계산 자료 |
+| `docs/` | 방법론, 수식, 데이터 규격, 선정 근거 |
+| `tests/` | 체결·데이터 누출·시장·결과물 검증 |
+| `tools/verify_final.py` | 두 시장의 결과 구성과 문서 링크 점검 |
 
-## 결과
+## 실행 방법
 
-[두 시장 비교표](reports/final/comparison.csv) · [비교 그림](reports/final/comparison.png) · [한국](reports/final/kospi200/summary_by_period.csv) · [미국](reports/final/sp500/summary_by_period.csv)
+원본 저장소의 Python 3.11 실행 안내와 고정 의존성을 유지했습니다. 환경과 데이터 정의는 [원본 README](UPSTREAM_README.md) 및 데이터 규격을 함께 확인하세요.
 
-공통 평가기간 2012~2025년, 개발 2012~2019년, 테스트 2020~2025년입니다. 정책은 M_only, L_only, EW_monthly, Cash_timing, B0, B1, B2, B2_1, B2_2입니다. 코스피는 모멘텀 단독 성과가 강하고, 미국 B2는 테스트 낙폭을 완화했으나 B1·B2의 50:50 대비 통계적 우위는 입증되지 않았습니다.
+```powershell
+git clone https://github.com/Kimjongyeop-web/bayesian-strategy-allocation.git
+cd bayesian-strategy-allocation
+py -3.11 -m venv .venv
+.\.venv\Scripts\python -m pip install -r requirements.txt
+.\.venv\Scripts\python -m pytest -q
+.\.venv\Scripts\python tools/verify_final.py
+```
 
-B2.1은 국면 간 평균 공유, B2.2는 M·L 공동 국면·공분산 추정입니다. 확장 모형 중 한국은 B2.1, 미국 위험조정 지표는 B2.2가 유망했으나 확장 모형의 우위를 확정할 근거는 부족합니다. B2.2의 낮은 유효표본수와 표본 수에 따른 민감도는 [방법론](docs/methodology.md)에 명시했습니다.
+저장된 압축 결과로 보고서를 다시 계산하려면 다음 명령을 사용합니다. 보고서와 그림이 다시 작성되므로 별도 작업 사본에서 실행하는 편이 좋습니다.
 
-성과는 배당 제외 가격수익률·비용 차감 기준입니다. 미국 양방향 6.5bp·추가 비용 0은 가정값이며 한국 매도세를 적용하지 않습니다. 현금 이자 0, 가격 상실 보유의 마지막 평가액 유지, 과거 자료를 이용한 선택의 한계가 있습니다. 새 미관측 표본 검증이 아닙니다.
+```powershell
+.\.venv\Scripts\python -m sprint2 report reports/final
+```
 
-## 재현
+전체 백테스트는 [데이터 규격](docs/data.md)에 적힌 원본 두 파일을 `data/raw/`에 준비한 뒤 실행합니다. 원자료와 캐시는 저장소에 포함되어 있지 않습니다.
 
-전체 실행은 `results/comparison/<run_id>/`에 상세 주문까지 저장합니다. 기존 결과는 보존하고 중복 이름에는 번호를 붙입니다. 최종 묶음은 daily/decisions/allocation/forecasts 압축 CSV, schema, config, manifest로 표·그림·진단을 재생성합니다. 원본과 캐시는 Git에 포함하지 않습니다.
+```powershell
+.\.venv\Scripts\python -m sprint2 check-data --market all
+.\.venv\Scripts\python -m sprint2 run --market all --run-id full
+```
 
-[방법론](docs/methodology.md) · [선정 근거](docs/evidence/README.md)
+전체 실행 결과는 `results/comparison/<run_id>/`에 저장됩니다. 기존 결과와 이름이 겹치면 번호를 붙입니다.
