@@ -1,0 +1,44 @@
+{
+  "selected_extensions": {
+    "kospi200": {
+      "retained_daily_exact": [
+        "M_only",
+        "L_only",
+        "EW_monthly",
+        "Cash_timing",
+        "B0",
+        "B1",
+        "B2"
+      ],
+      "extension_code": {
+        "commit": "a56cb855ed220f6b0efeff7da4ca9a97b9a95882",
+        "code_dirty": false
+      },
+      "currency": "KRW",
+      "initial_cash": 10000000.0,
+      "max_extension_ledger_error": 9.449071835035469e-14
+    },
+    "sp500": {
+      "retained_daily_exact": [
+        "M_only",
+        "L_only",
+        "EW_monthly",
+        "Cash_timing",
+        "B0",
+        "B1",
+        "B2"
+      ],
+      "extension_code": {
+        "commit": "a56cb855ed220f6b0efeff7da4ca9a97b9a95882",
+        "code_dirty": false
+      },
+      "currency": "USD",
+      "initial_cash": 100000.0,
+      "max_extension_ledger_error": 9.44837223495482e-16
+    }
+  },
+  "comparison_rows": 54,
+  "test_suite_passed": 45,
+  "research_limits": "Exploratory selection; B2.2 low ESS/sample-count sensitivity and common-week sample differ from B2.",
+  "compact_report_regeneration": "passed for nine-policy bundle without original workbooks"
+}

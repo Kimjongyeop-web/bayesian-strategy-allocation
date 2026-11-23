@@ -1,0 +1,310 @@
+{
+  "status": "completed",
+  "elapsed_seconds": 366.2,
+  "git": {
+    "commit": "dda049fa34c420c2a90c29ff0a7157cc55d0f450",
+    "code_dirty": false
+  },
+  "data": {
+    "path": "data/raw/KOSPI200_분석데이터_FULL_HISTORY_PCA_READY_2008_2026.xlsx",
+    "sha256": "7c87280fe91278bdab28e50677ff70e34440d34ae60410e4de6a5e4a656637fe",
+    "rows": 4582,
+    "tickers": 407,
+    "first_date": "2008-01-02",
+    "last_date": "2026-07-31",
+    "market": "kospi200",
+    "currency": "KRW",
+    "return_basis": "adjusted_price_excluding_dividends",
+    "analysis_filter": "none",
+    "loader_version": 3,
+    "missing_price_cells": 323198,
+    "execution_blocked_cells": 0
+  },
+  "rows": {
+    "strategy_start": "2008-01-02",
+    "prep": [
+      "2009-01-02",
+      "2011-12-29"
+    ],
+    "eval_actually_run": [
+      "2012-01-02",
+      "2025-12-30"
+    ]
+  },
+  "strategies": {
+    "M": {
+      "version": "9fa24a4aa164",
+      "signal": "sprint2.part1_momentum:high2y",
+      "params": {
+        "window": 504,
+        "min_periods": 403
+      },
+      "rule": {
+        "top": 0.2,
+        "keep": 0.4,
+        "min_valid": 50,
+        "reselect": "month_end"
+      }
+    },
+    "L": {
+      "version": "ceb9a1ce0f50",
+      "signal": "sprint2.part2_lowvol:lowvol",
+      "params": {
+        "window": 60
+      },
+      "rule": {
+        "top": 0.2,
+        "keep": 0.4,
+        "min_valid": 50,
+        "reselect": "month_end"
+      }
+    }
+  },
+  "requested_periods": {
+    "strategy_start": "2008-01-02",
+    "prep": [
+      "2009-01-02",
+      "2011-12-30"
+    ],
+    "eval": [
+      "2012-01-02",
+      "2025-12-31"
+    ]
+  },
+  "execution_assumptions": {
+    "initial_cash": 10000000.0,
+    "min_order_nav": 0.0025,
+    "buy_bps": 6.5,
+    "sell_bps": 6.5,
+    "sale_tax_schedule": [
+      [
+        "2008-01-02",
+        0.003
+      ],
+      [
+        "2019-05-30",
+        0.0025
+      ],
+      [
+        "2020-12-29",
+        0.0023
+      ],
+      [
+        "2022-12-28",
+        0.002
+      ],
+      [
+        "2023-12-27",
+        0.0018
+      ],
+      [
+        "2024-12-27",
+        0.0015
+      ],
+      [
+        "2025-12-29",
+        0.002
+      ]
+    ],
+    "stale_exit": {
+      "after_days": null,
+      "recovery_rate": null
+    }
+  },
+  "return_basis": "adjusted_price_excluding_dividends",
+  "vref": {
+    "Cash_timing": [
+      [
+        0.00014145566370238574,
+        9.16208777382652e-05
+      ],
+      [
+        9.16208777382652e-05,
+        9.402023264995046e-05
+      ]
+    ],
+    "B0": [
+      [
+        0.00014145566370238574,
+        9.16208777382652e-05
+      ],
+      [
+        9.16208777382652e-05,
+        9.402023264995046e-05
+      ]
+    ],
+    "B1": [
+      [
+        0.00014145566370238574,
+        9.16208777382652e-05
+      ],
+      [
+        9.16208777382652e-05,
+        9.402023264995046e-05
+      ]
+    ]
+  },
+  "max_ledger_identity_error_rel": {
+    "M": 3.725290298461914e-16,
+    "L": 3.872416541826406e-16,
+    "EW_monthly": 3.975002765294768e-16,
+    "Cash_timing": 3.658627742555469e-16,
+    "B0": 2.720110378363429e-14,
+    "B1": 6.603996246716653e-16,
+    "B2": 6.232841502284637e-14,
+    "B2_1": 2.347764535620598e-15,
+    "B2_2": 9.449071835035469e-14
+  },
+  "python": "3.11.9",
+  "packages": {
+    "numpy": "2.4.6",
+    "pandas": "3.1.0",
+    "scipy": "1.17.1",
+    "cvxpy": "1.9.3",
+    "clarabel": "0.11.1",
+    "openpyxl": "3.1.5",
+    "matplotlib": "3.11.2",
+    "PyYAML": "6.0.3"
+  },
+  "publication_path_normalized": true,
+  "selected_extensions": {
+    "policies": [
+      "B2_1",
+      "B2_2"
+    ],
+    "manifest": {
+      "status": "completed",
+      "elapsed_seconds": 404.0,
+      "git": {
+        "commit": "a56cb855ed220f6b0efeff7da4ca9a97b9a95882",
+        "code_dirty": false
+      },
+      "data": {
+        "path": "data/raw/KOSPI200_분석데이터_FULL_HISTORY_PCA_READY_2008_2026.xlsx",
+        "sha256": "7c87280fe91278bdab28e50677ff70e34440d34ae60410e4de6a5e4a656637fe",
+        "rows": 4582,
+        "tickers": 407,
+        "first_date": "2008-01-02",
+        "last_date": "2026-07-31",
+        "market": "kospi200",
+        "currency": "KRW",
+        "return_basis": "adjusted_price_excluding_dividends",
+        "analysis_filter": "none",
+        "loader_version": 3,
+        "missing_price_cells": 323198,
+        "execution_blocked_cells": 0
+      },
+      "rows": {
+        "strategy_start": "2008-01-02",
+        "prep": [
+          "2009-01-02",
+          "2011-12-29"
+        ],
+        "eval_actually_run": [
+          "2012-01-02",
+          "2025-12-30"
+        ]
+      },
+      "strategies": {
+        "M": {
+          "version": "9fa24a4aa164",
+          "signal": "sprint2.part1_momentum:high2y",
+          "params": {
+            "window": 504,
+            "min_periods": 403
+          },
+          "rule": {
+            "top": 0.2,
+            "keep": 0.4,
+            "min_valid": 50,
+            "reselect": "month_end"
+          }
+        },
+        "L": {
+          "version": "ceb9a1ce0f50",
+          "signal": "sprint2.part2_lowvol:lowvol",
+          "params": {
+            "window": 60
+          },
+          "rule": {
+            "top": 0.2,
+            "keep": 0.4,
+            "min_valid": 50,
+            "reselect": "month_end"
+          }
+        }
+      },
+      "requested_periods": {
+        "strategy_start": "2008-01-02",
+        "prep": [
+          "2009-01-02",
+          "2011-12-30"
+        ],
+        "eval": [
+          "2012-01-02",
+          "2025-12-31"
+        ]
+      },
+      "execution_assumptions": {
+        "initial_cash": 10000000.0,
+        "min_order_nav": 0.0025,
+        "buy_bps": 6.5,
+        "sell_bps": 6.5,
+        "sale_tax_schedule": [
+          [
+            "2008-01-02",
+            0.003
+          ],
+          [
+            "2019-05-30",
+            0.0025
+          ],
+          [
+            "2020-12-29",
+            0.0023
+          ],
+          [
+            "2022-12-28",
+            0.002
+          ],
+          [
+            "2023-12-27",
+            0.0018
+          ],
+          [
+            "2024-12-27",
+            0.0015
+          ],
+          [
+            "2025-12-29",
+            0.002
+          ]
+        ],
+        "stale_exit": {
+          "after_days": null,
+          "recovery_rate": null
+        }
+      },
+      "return_basis": "adjusted_price_excluding_dividends",
+      "vref": {},
+      "max_ledger_identity_error_rel": {
+        "M": 3.725290298461914e-16,
+        "L": 3.872416541826406e-16,
+        "B2_1": 2.347764535620598e-15,
+        "B2_2": 9.449071835035469e-14
+      },
+      "python": "3.12.14",
+      "packages": {
+        "numpy": "2.4.6",
+        "pandas": "3.1.0",
+        "scipy": "1.17.1",
+        "cvxpy": "1.9.3",
+        "clarabel": "0.11.1",
+        "openpyxl": "3.1.5",
+        "matplotlib": "3.11.2",
+        "PyYAML": "6.0.3"
+      }
+    },
+    "composition": "Original seven policy inputs retained; two extensions separately rerun with identical final market settings."
+  }
+}

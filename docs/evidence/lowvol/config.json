@@ -1,0 +1,151 @@
+{
+  "experiment": {
+    "reference": {
+      "hsh_commit": "8dbc034307b5af7f13f80a52201f1e4821f778b4",
+      "kjy_commit": "e47e982ac43b04302559e47c8b741539dacac627"
+    },
+    "signal": {
+      "rolling_windows": [
+        60,
+        120
+      ],
+      "ewma_half_life": 20,
+      "ewma_min_observations": 60,
+      "top": 0.2,
+      "keep": 0.4,
+      "min_names": 50,
+      "missing_policy": "exclude_if_missing_in_rolling_window; EWMA_requires_60_consecutive_recent_returns"
+    },
+    "run": {
+      "start": "2009-01-09",
+      "end": "2026-07-31",
+      "seed": 42,
+      "details": false
+    }
+  },
+  "execution_ledger": {
+    "data": {
+      "manifest": "part2_reversal/docs/full_history_manifest.json",
+      "raw_dir": null,
+      "verify_hash": true
+    },
+    "universe": {
+      "history_window": 252,
+      "min_returns": 240,
+      "min_positive_volume": 240,
+      "recent_window": 60,
+      "min_recent_returns": 55,
+      "liquidity_window": 60,
+      "liquidity_min_periods": 40,
+      "max_names": 80
+    },
+    "risk": {
+      "volatility_window": 60,
+      "volatility_min_periods": 40,
+      "sigma_floor": 0.005,
+      "shock_log_threshold": 0.35,
+      "shock_sigma_multiple": 12.0,
+      "quarantine_days": 10,
+      "return_clip_sigma": 6.0,
+      "pca_window": 126,
+      "factors": 3,
+      "smooth_window": 20,
+      "train_transitions": 252,
+      "scale_mean_floor": 0.1,
+      "scale_absolute_floor": 1e-07,
+      "state_clip": 4.0,
+      "prior_intercept_precision": 1.0,
+      "prior_slope_precision": 16.0,
+      "prior_own_lag": 0.95,
+      "ig_shape": 3.0,
+      "ig_scale": 2.0,
+      "likelihood_power": 0.05,
+      "forecast_steps": 2,
+      "predicted_mean_lower": 0.1,
+      "predicted_mean_upper": 10.0,
+      "variance_floor": 1e-06,
+      "ewma_window": 252,
+      "ewma_half_life": 20.0,
+      "ewma_diagonal_shrinkage": 0.2
+    },
+    "portfolio": {
+      "initial_cash": 10000000.0,
+      "risk_aversion": 5.0,
+      "planning_days": 20,
+      "max_weight": 0.08,
+      "minimum_order_nav": 0.0025,
+      "annual_vol_target": 0.15,
+      "solver_tolerance": 1e-07,
+      "solver_iterations": 2500,
+      "solver_retry_iterations": 15000
+    },
+    "costs": {
+      "commission_bps": 1.5,
+      "slippage_bps": 3.0,
+      "impact_bps": 2.0,
+      "missing_exit_recovery": 1.0,
+      "charge_sale_tax": true,
+      "sale_tax_schedule": [
+        [
+          "2008-01-02",
+          0.003
+        ],
+        [
+          "2019-05-30",
+          0.0025
+        ],
+        [
+          "2020-12-29",
+          0.0023
+        ],
+        [
+          "2022-12-28",
+          0.002
+        ],
+        [
+          "2023-12-27",
+          0.0018
+        ],
+        [
+          "2024-12-27",
+          0.0015
+        ],
+        [
+          "2025-12-29",
+          0.002
+        ]
+      ]
+    },
+    "evaluation": {
+      "annualization": 252,
+      "annual_risk_free": 0.0,
+      "std_ddof": 1,
+      "cer_risk_aversion": 5.0,
+      "no_trade_tolerance_krw": 1e-06,
+      "no_investment_tolerance": 1e-08,
+      "periods": {
+        "initial": [
+          "2009-01-09",
+          "2021-12-31"
+        ],
+        "test": [
+          "2022-01-01",
+          "2023-12-31"
+        ],
+        "prediction": [
+          "2024-01-01",
+          "2026-07-31"
+        ]
+      }
+    },
+    "run": {
+      "start": "2009-01-09",
+      "end": "2026-07-31",
+      "policies": [
+        "FI_FULL",
+        "EWMA_FULL"
+      ],
+      "details": true
+    }
+  }
+}

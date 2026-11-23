@@ -1,0 +1,35 @@
+{
+  "dataset_id": "kospi200-full-history-pca-ready-2008-20260731",
+  "files": {
+    "analysis": {
+      "filename": "KOSPI200_분석데이터_FULL_HISTORY_PCA_READY_2008_2026.xlsx",
+      "sha256": "7c87280fe91278bdab28e50677ff70e34440d34ae60410e4de6a5e4a656637fe"
+    },
+    "qc": {
+      "filename": "KOSPI200_QC안내검토표_FULL_HISTORY_PCA_READY_2008_2026.xlsx",
+      "sha256": "695192b56d3e60cbde9de3741bd6603982e53d083919b7f60be5b0c19d46083d"
+    }
+  },
+  "raw_price_missing": 323198,
+  "raw_volume_missing": 323198,
+  "price_observations": 1541676,
+  "membership_observations": 917022,
+  "directory": "User supplied raw directory via --data-dir; original absolute location retained in local run manifest.",
+  "period": [
+    "2008-01-02 00:00:00",
+    "2026-07-31 00:00:00"
+  ],
+  "shape": [
+    4582,
+    407
+  ],
+  "sheets": {
+    "수정주가": "date x ticker; adjusted quote price; no unit conversion",
+    "거래량": "date x ticker; shares",
+    "KOSPI200편입여부": "date x ticker; 0/1"
+  },
+  "roles": {
+    "analysis": "unaltered price/volume/membership workbook",
+    "qc": "unaltered QC reference, hash checked; no signal input"
+  }
+}

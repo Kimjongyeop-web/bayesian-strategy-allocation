@@ -1,0 +1,93 @@
+{
+  "status": "completed",
+  "reference": {
+    "hsh_commit": "8dbc034307b5af7f13f80a52201f1e4821f778b4",
+    "kjy_commit": "e47e982ac43b04302559e47c8b741539dacac627"
+  },
+  "python": "3.14.6",
+  "packages": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "scipy": "1.18.0",
+    "PyYAML": "6.0.3",
+    "openpyxl": "3.1.5",
+    "matplotlib": "3.11.0"
+  },
+  "code_sha256": {
+    "src\\configuration.py": "9e1d4ea7cba5a1cf670a90854cc4e5246c16eff95857039cf32b58e69e09b8af",
+    "src\\engine.py": "8a93fdd5fda59e0d0d60c61e3a2e582c65de8e2c03b8cac48fa3d842ced40a80",
+    "src\\metrics.py": "850e031bc0079f4f655fa190f9f0c19a98450ae841c226208ded3ba4e7e9c7ce",
+    "src\\models.py": "5e5e62d73c5f9425ac7790f6b10e274d00ddbaba37499968ee7cf29851c839cc",
+    "src\\optimizer.py": "1b1ca56c36365debe37e4566621369facdeda73fb9d30630a841cad9fc96b4bc",
+    "src\\report.py": "e866d268376e95f69eb4d82e704d3f47b2604204bda396b4b2cdbc0e03b3ba9c",
+    "src\\run.py": "09dd4dd757ec856cbcaeda9f43c3a9821fa0b70ebe9c5eed2563868fd036f796",
+    "src\\run_legacy_bayesian.py": "2e02e2954d6e882e8ac468c91ec90393466dc15069d77eb85552786d05277b4a",
+    "src\\run_nonbayesian.py": "f2627c92c9b59dde485acd3218d6787d2b64332487ffbd0192cb858646a06365",
+    "src\\run_standalone_volatility.py": "77dd17a1d44ad7e367cebfde4673f1fe9aae6ac4144db6cd2409e4615512701a",
+    "src\\validate.py": "42285d2f220939a0bbf1efd5f89dfe7826f26789bf2696f68ebd029a52baf262",
+    "reference_hsh\\src\\compare_part2_engine.py": "ad70e5c919c731aa12880e9686869d0d5bbf4cc93db588224a1621d2869098eb",
+    "reference_hsh\\src\\engine.py": "be9750a311450077e814e58021d8201356afd34166b8c9a218c5474b11ca0c62",
+    "reference_hsh\\src\\signals.py": "fbea3a858858e55cdfffc5ba35a7e29164714914bc989bd4a3d5695c1fea302d"
+  },
+  "validation": {
+    "LOWVOL60": {
+      "orders": 2760,
+      "max_independent_error_krw": 5.587935447692871e-09,
+      "next_close": true,
+      "net_orders": true,
+      "valid_fills": true,
+      "ledger_identity_max_error_krw": 3.725290298461914e-09
+    },
+    "LOWVOL120": {
+      "orders": 1558,
+      "max_independent_error_krw": 7.450580596923828e-09,
+      "next_close": true,
+      "net_orders": true,
+      "valid_fills": true,
+      "ledger_identity_max_error_krw": 7.450580596923828e-09
+    },
+    "LOWVOL_EWMA20": {
+      "orders": 2725,
+      "max_independent_error_krw": 7.450580596923828e-09,
+      "next_close": true,
+      "net_orders": true,
+      "valid_fills": true,
+      "ledger_identity_max_error_krw": 3.725290298461914e-09
+    }
+  },
+  "source": {
+    "dataset_id": "kospi200-full-history-pca-ready-2008-20260731",
+    "files": {
+      "analysis": {
+        "filename": "KOSPI200_분석데이터_FULL_HISTORY_PCA_READY_2008_2026.xlsx",
+        "sha256": "7c87280fe91278bdab28e50677ff70e34440d34ae60410e4de6a5e4a656637fe"
+      },
+      "qc": {
+        "filename": "KOSPI200_QC안내검토표_FULL_HISTORY_PCA_READY_2008_2026.xlsx",
+        "sha256": "695192b56d3e60cbde9de3741bd6603982e53d083919b7f60be5b0c19d46083d"
+      }
+    },
+    "raw_price_missing": 323198,
+    "raw_volume_missing": 323198,
+    "price_observations": 1541676,
+    "membership_observations": 917022,
+    "directory": "User supplied raw directory via --data-dir; original absolute location retained in local run manifest.",
+    "period": [
+      "2008-01-02 00:00:00",
+      "2026-07-31 00:00:00"
+    ],
+    "shape": [
+      4582,
+      407
+    ],
+    "sheets": {
+      "수정주가": "date x ticker; adjusted quote price; no unit conversion",
+      "거래량": "date x ticker; shares",
+      "KOSPI200편입여부": "date x ticker; 0/1"
+    },
+    "roles": {
+      "analysis": "unaltered price/volume/membership workbook",
+      "qc": "unaltered QC reference, hash checked; no signal input"
+    }
+  }
+}

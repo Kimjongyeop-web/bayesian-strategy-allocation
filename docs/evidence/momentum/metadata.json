@@ -1,0 +1,24 @@
+{
+  "status": "completed",
+  "config_sha256": "9eb9d8be14adf96fc7d06cb3bd00b6f387b5cc54a43ab54548d33c8e64182b5d",
+  "python": "3.14.2",
+  "source_code_sha256": {
+    "compare_part2_engine.py": "5dd817535b002e84820346edbb47857d0ed00e762ca78adbcc03efe6dfe238a0",
+    "configuration.py": "beafd7944db79e6bdbd6798274aa7363e67fca1daef0ed9b95dc7ee413bdf59f",
+    "data_check.py": "8d50c2e77f1fee24a56e3f329f1ad79eef708517675459c23b472230ce05c181",
+    "engine.py": "4051a9277bf9fa1f722ffcea7d150379d03528ce7a065ba64e754d9a713a64da",
+    "metrics.py": "f13987697e55e386e4e4df516774efb8935eca219a6d6fa215a1de187f0e8165",
+    "models.py": "260067177cede244dc0389c8adf3a0e603028ed00e315e99ddff9a7ac7762747",
+    "run.py": "7778faa5bebfe654cf01a64747bcd72a0689f5268050589d9c7ce1a5d0d0f146",
+    "signals.py": "721be95bb29cb3f55111fb8bdc05735f9782a89c228e1d2b6e13b5e31dd69668",
+    "validate.py": "401a7a357404f3db650dfbf2817cb65ecd3530d13ba45b3f67663cf28fbc9417"
+  },
+  "data": {
+    "dataset_id": "kospi200-full-history-pca-ready-2008-20260731",
+    "file": "KOSPI200_분석데이터_FULL_HISTORY_PCA_READY_2008_2026.xlsx",
+    "sha256": "7c87280fe91278bdab28e50677ff70e34440d34ae60410e4de6a5e4a656637fe",
+    "price_observations": 1541676,
+    "membership_observations": 917022
+  },
+  "first_high2y_signal": "2009-08-31"
+}

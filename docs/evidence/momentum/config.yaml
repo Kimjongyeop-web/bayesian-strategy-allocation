@@ -1,0 +1,84 @@
+data:
+  manifest: part1_momentum/docs/full_history_manifest.json
+  raw_dir: null
+  verify_hash: true
+signal:
+  window: 504
+  min_periods: 403
+  fallback_until_ready:
+  - 252
+  - 21
+  min_ready_names: 20
+market_filter:
+  sma_months: 10
+portfolio:
+  initial_cash: 10000000.0
+  min_names: 50
+strategies:
+  HIGH2Y_BASE:
+    label: 2년 고가 20% (기본형)
+    top: 0.2
+    keep: 0.4
+    reweight: false
+    defense_weight: null
+  HIGH2Y_DEFENSE_CASH:
+    label: 2년 고가 20% + 10개월선 방어(현금)
+    top: 0.2
+    keep: 0.4
+    reweight: true
+    defense_weight: 0.0
+  HIGH2Y_DEFENSE_HALF:
+    label: 2년 고가 20% + 10개월선 방어(주식 50%)
+    top: 0.2
+    keep: 0.4
+    reweight: true
+    defense_weight: 0.5
+costs:
+  commission_bps: 1.5
+  slippage_bps: 3.0
+  impact_bps: 2.0
+  charge_sale_tax: true
+  sale_tax_schedule:
+  - - '2008-01-02'
+    - 0.003
+  - - '2019-05-30'
+    - 0.0025
+  - - '2020-12-29'
+    - 0.0023
+  - - '2022-12-28'
+    - 0.002
+  - - '2023-12-27'
+    - 0.0018
+  - - '2024-12-27'
+    - 0.0015
+  - - '2025-12-29'
+    - 0.002
+evaluation:
+  annualization: 252
+  annual_risk_free: 0.0
+  std_ddof: 1
+  cer_risk_aversion: 5.0
+  no_trade_tolerance_krw: 1.0e-06
+  no_investment_tolerance: 1.0e-08
+  periods:
+    initial:
+    - '2009-01-09'
+    - '2021-12-31'
+    test:
+    - '2022-01-01'
+    - '2023-12-31'
+    prediction:
+    - '2024-01-01'
+    - '2026-07-31'
+validation:
+  bootstrap_block: 21
+  bootstrap_draws: 5000
+  seed: 42
+  placebo_draws: 5
+run:
+  start: '2009-01-09'
+  end: '2026-07-31'
+  strategies:
+  - HIGH2Y_BASE
+  - HIGH2Y_DEFENSE_CASH
+  - HIGH2Y_DEFENSE_HALF

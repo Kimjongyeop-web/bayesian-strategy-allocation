@@ -1,0 +1,27 @@
+data:
+  path: data/raw/SP500_분석데이터_CRSP_집계정리_2008_2025.xlsx
+  sha256: 9b5c9b0b9368b406086f693fa321fb1959be2d20315d36425995aa1bfd992f15
+  cache_dir: cache
+  market: sp500
+execution:
+  initial_cash: 100000.0
+  min_order_nav: 0.0025
+  buy_bps: 6.5
+  sell_bps: 6.5
+  sale_tax_schedule:
+  - - '2008-01-02'
+    - 0.0
+  stale_exit:
+    after_days: null
+    recovery_rate: null
+  currency: USD
+  cost_assumption: Hypothetical 6.5bps each side; no other fees or sale tax; not verified
+    brokerage costs
+periods:
+  strategy_start: '2008-01-02'
+  prep:
+  - '2009-01-02'
+  - '2011-12-30'
+  eval:
+  - '2012-01-02'
+  - '2025-12-31'

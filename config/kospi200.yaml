@@ -1,0 +1,36 @@
+data:
+  path: data/raw/KOSPI200_분석데이터_FULL_HISTORY_PCA_READY_2008_2026.xlsx
+  sha256: 7c87280fe91278bdab28e50677ff70e34440d34ae60410e4de6a5e4a656637fe
+  cache_dir: cache
+  market: kospi200
+execution:
+  initial_cash: 10000000.0
+  min_order_nav: 0.0025
+  buy_bps: 6.5
+  sell_bps: 6.5
+  sale_tax_schedule:
+  - - '2008-01-02'
+    - 0.003
+  - - '2019-05-30'
+    - 0.0025
+  - - '2020-12-29'
+    - 0.0023
+  - - '2022-12-28'
+    - 0.002
+  - - '2023-12-27'
+    - 0.0018
+  - - '2024-12-27'
+    - 0.0015
+  - - '2025-12-29'
+    - 0.002
+  stale_exit:
+    after_days: null
+    recovery_rate: null
+periods:
+  strategy_start: '2008-01-02'
+  prep:
+  - '2009-01-02'
+  - '2011-12-30'
+  eval:
+  - '2012-01-02'
+  - '2025-12-31'

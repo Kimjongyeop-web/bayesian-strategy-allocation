@@ -1,0 +1,266 @@
+{
+  "status": "completed",
+  "elapsed_seconds": 416.8,
+  "git": {
+    "commit": "dda049fa34c420c2a90c29ff0a7157cc55d0f450",
+    "code_dirty": false
+  },
+  "data": {
+    "path": "data/raw/SP500_분석데이터_CRSP_집계정리_2008_2025.xlsx",
+    "sha256": "9b5c9b0b9368b406086f693fa321fb1959be2d20315d36425995aa1bfd992f15",
+    "rows": 4529,
+    "tickers": 877,
+    "first_date": "2008-01-02",
+    "last_date": "2025-12-31",
+    "market": "sp500",
+    "currency": "USD",
+    "return_basis": "adjusted_price_excluding_dividends",
+    "analysis_filter": "none",
+    "loader_version": 3,
+    "missing_price_cells": 873180,
+    "execution_blocked_cells": 873189
+  },
+  "rows": {
+    "strategy_start": "2008-01-02",
+    "prep": [
+      "2009-01-02",
+      "2011-12-30"
+    ],
+    "eval_actually_run": [
+      "2012-01-03",
+      "2025-12-31"
+    ]
+  },
+  "strategies": {
+    "M": {
+      "version": "9fa24a4aa164",
+      "signal": "sprint2.part1_momentum:high2y",
+      "params": {
+        "window": 504,
+        "min_periods": 403
+      },
+      "rule": {
+        "top": 0.2,
+        "keep": 0.4,
+        "min_valid": 50,
+        "reselect": "month_end"
+      }
+    },
+    "L": {
+      "version": "ceb9a1ce0f50",
+      "signal": "sprint2.part2_lowvol:lowvol",
+      "params": {
+        "window": 60
+      },
+      "rule": {
+        "top": 0.2,
+        "keep": 0.4,
+        "min_valid": 50,
+        "reselect": "month_end"
+      }
+    }
+  },
+  "requested_periods": {
+    "strategy_start": "2008-01-02",
+    "prep": [
+      "2009-01-02",
+      "2011-12-30"
+    ],
+    "eval": [
+      "2012-01-02",
+      "2025-12-31"
+    ]
+  },
+  "execution_assumptions": {
+    "initial_cash": 100000.0,
+    "min_order_nav": 0.0025,
+    "buy_bps": 6.5,
+    "sell_bps": 6.5,
+    "sale_tax_schedule": [
+      [
+        "2008-01-02",
+        0.0
+      ]
+    ],
+    "stale_exit": {
+      "after_days": null,
+      "recovery_rate": null
+    },
+    "currency": "USD",
+    "cost_assumption": "Hypothetical 6.5bps each side; no other fees or sale tax; not verified brokerage costs"
+  },
+  "return_basis": "adjusted_price_excluding_dividends",
+  "vref": {
+    "Cash_timing": [
+      [
+        0.0001251650357521992,
+        9.499477550919779e-05
+      ],
+      [
+        9.499477550919779e-05,
+        7.651690220773462e-05
+      ]
+    ],
+    "B0": [
+      [
+        0.0001251650357521992,
+        9.499477550919779e-05
+      ],
+      [
+        9.499477550919779e-05,
+        7.651690220773462e-05
+      ]
+    ],
+    "B1": [
+      [
+        0.0001251650357521992,
+        9.499477550919779e-05
+      ],
+      [
+        9.499477550919779e-05,
+        7.651690220773462e-05
+      ]
+    ]
+  },
+  "max_ledger_identity_error_rel": {
+    "M": 6.444327776418482e-16,
+    "L": 4.0712013288787415e-16,
+    "EW_monthly": 4.55315783492423e-16,
+    "Cash_timing": 3.943865220986115e-15,
+    "B0": 6.161985691356378e-16,
+    "B1": 8.517759595720774e-15,
+    "B2": 9.675369870972028e-16,
+    "B2_1": 7.965733752146588e-16,
+    "B2_2": 9.44837223495482e-16
+  },
+  "python": "3.11.9",
+  "packages": {
+    "numpy": "2.4.6",
+    "pandas": "3.1.0",
+    "scipy": "1.17.1",
+    "cvxpy": "1.9.3",
+    "clarabel": "0.11.1",
+    "openpyxl": "3.1.5",
+    "matplotlib": "3.11.2",
+    "PyYAML": "6.0.3"
+  },
+  "publication_path_normalized": true,
+  "selected_extensions": {
+    "policies": [
+      "B2_1",
+      "B2_2"
+    ],
+    "manifest": {
+      "status": "completed",
+      "elapsed_seconds": 405.3,
+      "git": {
+        "commit": "a56cb855ed220f6b0efeff7da4ca9a97b9a95882",
+        "code_dirty": false
+      },
+      "data": {
+        "path": "data/raw/SP500_분석데이터_CRSP_집계정리_2008_2025.xlsx",
+        "sha256": "9b5c9b0b9368b406086f693fa321fb1959be2d20315d36425995aa1bfd992f15",
+        "rows": 4529,
+        "tickers": 877,
+        "first_date": "2008-01-02",
+        "last_date": "2025-12-31",
+        "market": "sp500",
+        "currency": "USD",
+        "return_basis": "adjusted_price_excluding_dividends",
+        "analysis_filter": "none",
+        "loader_version": 3,
+        "missing_price_cells": 873180,
+        "execution_blocked_cells": 873189
+      },
+      "rows": {
+        "strategy_start": "2008-01-02",
+        "prep": [
+          "2009-01-02",
+          "2011-12-30"
+        ],
+        "eval_actually_run": [
+          "2012-01-03",
+          "2025-12-31"
+        ]
+      },
+      "strategies": {
+        "M": {
+          "version": "9fa24a4aa164",
+          "signal": "sprint2.part1_momentum:high2y",
+          "params": {
+            "window": 504,
+            "min_periods": 403
+          },
+          "rule": {
+            "top": 0.2,
+            "keep": 0.4,
+            "min_valid": 50,
+            "reselect": "month_end"
+          }
+        },
+        "L": {
+          "version": "ceb9a1ce0f50",
+          "signal": "sprint2.part2_lowvol:lowvol",
+          "params": {
+            "window": 60
+          },
+          "rule": {
+            "top": 0.2,
+            "keep": 0.4,
+            "min_valid": 50,
+            "reselect": "month_end"
+          }
+        }
+      },
+      "requested_periods": {
+        "strategy_start": "2008-01-02",
+        "prep": [
+          "2009-01-02",
+          "2011-12-30"
+        ],
+        "eval": [
+          "2012-01-02",
+          "2025-12-31"
+        ]
+      },
+      "execution_assumptions": {
+        "initial_cash": 100000.0,
+        "min_order_nav": 0.0025,
+        "buy_bps": 6.5,
+        "sell_bps": 6.5,
+        "sale_tax_schedule": [
+          [
+            "2008-01-02",
+            0.0
+          ]
+        ],
+        "stale_exit": {
+          "after_days": null,
+          "recovery_rate": null
+        },
+        "currency": "USD",
+        "cost_assumption": "Hypothetical 6.5bps each side; no other fees or sale tax; not verified brokerage costs"
+      },
+      "return_basis": "adjusted_price_excluding_dividends",
+      "vref": {},
+      "max_ledger_identity_error_rel": {
+        "M": 6.444327776418482e-16,
+        "L": 4.0712013288787415e-16,
+        "B2_1": 7.965733752146588e-16,
+        "B2_2": 9.44837223495482e-16
+      },
+      "python": "3.12.14",
+      "packages": {
+        "numpy": "2.4.6",
+        "pandas": "3.1.0",
+        "scipy": "1.17.1",
+        "cvxpy": "1.9.3",
+        "clarabel": "0.11.1",
+        "openpyxl": "3.1.5",
+        "matplotlib": "3.11.2",
+        "PyYAML": "6.0.3"
+      }
+    },
+    "composition": "Original seven policy inputs retained; two extensions separately rerun with identical final market settings."
+  }
+}
